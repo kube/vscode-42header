@@ -63,7 +63,6 @@ function insertHeaderHandler() {
 
 /**
  * Start watcher for document save to update current header
- * if broken by code-formatter
  */
 function startHeaderUpdateOnSaveWatcher(subscriptions: vscode.Disposable[]) {
   const ignoreNextSave = new WeakSet()
