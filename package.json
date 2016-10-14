@@ -25,6 +25,18 @@
   ],
   "main": "./out/src/extension",
   "contributes": {
+    "configuration": {
+      "properties": {
+        "42header.username": {
+          "type": "string",
+          "description": "Username to use in 42 headers"
+        },
+        "42header.email": {
+          "type": "string",
+          "description": "Email address to use in 42 headers"
+        }
+      }
+    },
     "commands": [
       {
         "command": "42header.insertHeader",

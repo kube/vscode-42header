@@ -25,16 +25,16 @@ import {
  * Return current user from config or ENV by default
  */
 function getCurrentUser() {
-  return process.env['USER']
+  return vscode.workspace.getConfiguration()
+    .get('42header.username') || process.env['USER']
 }
 
 /**
- * Return current user mail from config or ENV by default
+ * Return current user mail from config or default value
  */
 function getCurrentUserMail() {
-  let user = getCurrentUser()
-
-  return `${user}@student.42.fr`
+  return vscode.workspace.getConfiguration()
+    .get('42header.email') || `${getCurrentUser()}@student.42.fr`
 }
 
 /**

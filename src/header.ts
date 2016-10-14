@@ -134,7 +134,7 @@ export const renderHeader = (languageId: string, info: IHeaderInfo) => [
   },
   {
     name: 'AUTHOR',
-    value: `${info.updatedBy} <${info.updatedBy}@student.42.fr>`
+    value: info.author
   },
   {
     name: 'CREATEDAT',
