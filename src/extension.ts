@@ -69,7 +69,7 @@ function insertHeaderHandler() {
   let document = activeTextEditor.document
   let languageId = document.languageId
 
-  if (supportsLanguage(languageId)) {
+  if (supportsLanguage(languageId))
     activeTextEditor.edit(editor => {
       let currentHeader = extractHeader(document.getText())
 
@@ -86,7 +86,6 @@ function insertHeaderHandler() {
           )
         )
     })
-  }
   else
     vscode.window.showInformationMessage(
       `No header support for language ${languageId}`)
