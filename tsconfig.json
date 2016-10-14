@@ -3,7 +3,9 @@
     "module": "commonjs",
     "target": "es5",
     "outDir": "out",
-    "noLib": true,
+    "lib": [
+      "es6"
+    ],
     "noImplicitAny": true,
     "sourceMap": true,
     "rootDir": "."
