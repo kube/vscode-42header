@@ -4,6 +4,7 @@
   "description": "42 header for VSCode : www.42.fr",
   "version": "0.42.2",
   "publisher": "kube",
+  "icon": "42.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/kube/vscode-42header"
