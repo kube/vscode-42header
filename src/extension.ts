@@ -8,7 +8,6 @@
      ## ## ## :##
       ## ## ##*/
 
-'use strict'
 import * as path from 'path'
 import * as vscode from 'vscode'
 import * as moment from 'moment'
@@ -18,9 +17,49 @@ import {
 } from 'vscode'
 
 import {
-  extractHeader, getHeaderInfo, updateHeaderInfo, renderHeader,
+  extractHeader, getHeaderInfo, renderHeader,
   supportsLanguage, IHeaderInfo
 } from './header'
+
+/**
+ * Return current user from config or ENV by default
+ */
+function getCurrentUser() {
+  return process.env['USER']
+}
+
+/**
+ * Return current user mail from config or ENV by default
+ */
+function getCurrentUserMail() {
+  let user = getCurrentUser()
+
+  return `${user}@student.42.fr`
+}
+
+/**
+ * Update HeaderInfo with last update author and date, and update filename
+ * Returns a fresh new HeaderInfo if none was passed
+ */
+function newHeaderInfo(document: TextDocument, headerInfo?: IHeaderInfo) {
+  let user = getCurrentUser()
+  let mail = getCurrentUserMail()
+
+  return Object.assign({},
+    // This will be overwritten if headerInfo is not null
+    {
+      createdAt: moment(),
+      createdBy: user
+    },
+    headerInfo,
+    {
+      filename: path.basename(document.fileName),
+      author: `${user} <${mail}>`,
+      updatedBy: user,
+      updatedAt: moment()
+    }
+  )
+}
 
 /**
  * `insertHeader` Command Handler
@@ -34,26 +73,18 @@ function insertHeaderHandler() {
     activeTextEditor.edit(editor => {
       let currentHeader = extractHeader(document.getText())
 
-      if (currentHeader) {
-        let headerInfo = getHeaderInfo(currentHeader)
-        let updatedHeaderInfo = updateHeaderInfo(headerInfo)
-        let header = renderHeader(languageId, updatedHeaderInfo)
-
-        editor.replace(new Range(0, 0, 12, 0), header)
-      }
-      else {
-        let user = process.env['USER']
-        let headerInfo = {
-          filename: path.basename(document.fileName),
-          author: `${user} <${user}@student.42.fr>`,
-          createdBy: user,
-          createdAt: moment(),
-          updatedBy: user,
-          updatedAt: moment()
-        }
-        let header = renderHeader(languageId, headerInfo)
-        editor.insert(new Position(0, 0), header)
-      }
+      if (currentHeader)
+        editor.replace(new Range(0, 0, 12, 0),
+          renderHeader(languageId,
+            newHeaderInfo(document, getHeaderInfo(currentHeader))
+          )
+        )
+      else
+        editor.insert(new Position(0, 0),
+          renderHeader(languageId,
+            newHeaderInfo(document)
+          )
+        )
     })
   }
   else
@@ -68,26 +99,20 @@ function startHeaderUpdateOnSaveWatcher(subscriptions: vscode.Disposable[]) {
   vscode.workspace.onWillSaveTextDocument(event => {
     let textEditor = vscode.window.activeTextEditor
     let document = event.document
+    let currentHeader = extractHeader(document.getText())
 
-    if (textEditor.document === document) {
-      let activeTextEditor = vscode.window.activeTextEditor
-      let languageId = document.languageId
-      let currentHeader = extractHeader(document.getText())
-
-      event.waitUntil(
-        textEditor.edit(editor => {
-          // If current language is supported
-          // and a header is present at top of document
-          if (supportsLanguage(languageId) && currentHeader) {
-            let headerInfo = getHeaderInfo(currentHeader)
-            let updatedHeaderInfo = updateHeaderInfo(headerInfo)
-            let header = renderHeader(languageId, updatedHeaderInfo)
-
-            editor.replace(new Range(0, 0, 12, 0), header)
-          }
-        })
-      )
-    }
+    event.waitUntil(
+      textEditor.edit(editor => {
+        // If current language is supported
+        // and a header is present at top of document
+        if (supportsLanguage(document.languageId) && currentHeader)
+          editor.replace(new Range(0, 0, 12, 0),
+            renderHeader(document.languageId,
+              newHeaderInfo(document, getHeaderInfo(currentHeader))
+            )
+          )
+      })
+    )
   }, null, subscriptions)
 }
 
@@ -97,7 +122,4 @@ export function activate(context: vscode.ExtensionContext) {
 
   context.subscriptions.push(disposable)
   startHeaderUpdateOnSaveWatcher(context.subscriptions)
-}
-
-export function deactivate() {
 }

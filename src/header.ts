@@ -125,18 +125,6 @@ export const getHeaderInfo = (header: string): IHeaderInfo => ({
 })
 
 /**
- * Update header info with current time and last author
- */
-export const updateHeaderInfo = (info: IHeaderInfo): IHeaderInfo => ({
-  filename: info.filename,
-  author: `${process.env['USER']} <${process.env['USER']}@student.42.fr>`,
-  createdBy: info.createdBy,
-  createdAt: info.createdAt,
-  updatedBy: process.env['USER'],
-  updatedAt: moment()
-})
-
-/**
  * Renders a language template with header info
  */
 export const renderHeader = (languageId: string, info: IHeaderInfo) => [
