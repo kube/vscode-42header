@@ -65,39 +65,28 @@ function insertHeaderHandler() {
  * Start watcher for document save to update current header
  */
 function startHeaderUpdateOnSaveWatcher(subscriptions: vscode.Disposable[]) {
-  const ignoreNextSave = new WeakSet()
-
-  // Here we use the trick from Luke Hoban Go Extension,
-  // But this will cause an infinite loop if another extension that
-  // uses the same technique is active.
-  // And it's really ugly.
-  vscode.workspace.onDidSaveTextDocument(document => {
+  vscode.workspace.onWillSaveTextDocument(event => {
     let textEditor = vscode.window.activeTextEditor
+    let document = event.document
 
-    if (textEditor.document === document
-      && !ignoreNextSave.has(document)) {
+    if (textEditor.document === document) {
       let activeTextEditor = vscode.window.activeTextEditor
       let languageId = document.languageId
       let currentHeader = extractHeader(document.getText())
 
-      // If current language is supported
-      // and a header is present at top of document
-      if (supportsLanguage(languageId) && currentHeader) {
+      event.waitUntil(
         textEditor.edit(editor => {
-          let headerInfo = getHeaderInfo(currentHeader)
-          let updatedHeaderInfo = updateHeaderInfo(headerInfo)
-          let header = renderHeader(languageId, updatedHeaderInfo)
+          // If current language is supported
+          // and a header is present at top of document
+          if (supportsLanguage(languageId) && currentHeader) {
+            let headerInfo = getHeaderInfo(currentHeader)
+            let updatedHeaderInfo = updateHeaderInfo(headerInfo)
+            let header = renderHeader(languageId, updatedHeaderInfo)
 
-          editor.replace(new Range(0, 0, 12, 0), header)
+            editor.replace(new Range(0, 0, 12, 0), header)
+          }
         })
-          .then(applied => {
-            ignoreNextSave.add(document)
-            return document.save()
-          })
-          .then(() => {
-            ignoreNextSave.delete(document)
-          }, err => { })
-      }
+      )
     }
   }, null, subscriptions)
 }
