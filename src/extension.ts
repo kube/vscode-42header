@@ -26,7 +26,7 @@ import {
  */
 function getCurrentUser() {
   return vscode.workspace.getConfiguration()
-    .get('42header.username') || process.env['USER']
+    .get('42header.username') || process.env['USER'] || 'marvin'
 }
 
 /**
