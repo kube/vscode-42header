@@ -14,7 +14,7 @@
   "homepage": "https://github.com/kube/vscode-42header",
   "license": "MIT",
   "engines": {
-    "vscode": "^1.4.0"
+    "vscode": "^1.6.0"
   },
   "categories": [
     "Other"
@@ -46,8 +46,9 @@
     "postinstall": "node ./node_modules/vscode/bin/install"
   },
   "devDependencies": {
-    "typescript": "^2.0.0",
-    "vscode": "^0.11.0"
+    "@types/node": "^6.0.45",
+    "typescript": "^2.0.3",
+    "vscode": "^1.0.0"
   },
   "dependencies": {
     "moment": "^2.15.0"
