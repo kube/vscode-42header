@@ -128,30 +128,12 @@ export const getHeaderInfo = (header: string): IHeaderInfo => ({
  * Renders a language template with header info
  */
 export const renderHeader = (languageId: string, info: IHeaderInfo) => [
-  {
-    name: 'FILENAME',
-    value: info.filename
-  },
-  {
-    name: 'AUTHOR',
-    value: info.author
-  },
-  {
-    name: 'CREATEDAT',
-    value: formatDate(info.createdAt)
-  },
-  {
-    name: 'CREATEDBY',
-    value: info.createdBy
-  },
-  {
-    name: 'UPDATEDAT',
-    value: formatDate(info.updatedAt)
-  },
-  {
-    name: 'UPDATEDBY',
-    value: info.updatedBy
-  }
+  { name: 'FILENAME', value: info.filename },
+  { name: 'AUTHOR', value: info.author },
+  { name: 'CREATEDAT', value: formatDate(info.createdAt) },
+  { name: 'CREATEDBY', value: info.createdBy },
+  { name: 'UPDATEDAT', value: formatDate(info.updatedAt) },
+  { name: 'UPDATEDBY', value: info.updatedBy }
 ].reduce((header, field) =>
   setFieldValue(header, field.name, field.value),
   getTemplate(languageId))
