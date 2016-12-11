@@ -1,6 +1,8 @@
+<img src="https://raw.githubusercontent.com/kube/vscode-42header/master/42.png" width=128>
+
 # 42 Header for VSCode
 
-This extension provides to 42 school students the 42 header integration in their code.
+This extension provides the 42 header integration in VS Code.
 
 ```bash
 # **************************************************************************** #
@@ -16,27 +18,33 @@ This extension provides to 42 school students the 42 header integration in their
 # **************************************************************************** #
 ```
 
+
 # Usage
 
-To insert a header, simply use `CMD` + `Alt` + `H` on macOS, or `Ctrl` + `Alt` + `H` on Linux / Windows.
+### Insert a header
+ - **macOS** : `⌘` + `⌥` + `H`
+ - **Linux** / **Windows** : `Ctrl` + `Alt` + `H`.
 
-If a header is already present, it will update filename and last update user and date.
+Header is automatically updated on save.
 
 
 # Configuration
 
-If you wanna use this extension on your own computer, you'll maybe need to configure the username and email address you wanna display in the headers.
+Default values for **username** and **email** are imported from environment variables.
 
-To do this, simply edit you *User Preferences*, and edit or insert these keys :
+To override these values, specify these properties in *User Settings* :
 
-`42header.username`
-
-`42header.email`
+```ts
+{
+  "42header.username": string,
+  "42header.email": string
+}
+```
 
 
 # Issues
 
-If you find some bug anywhere, or a missing feature, do not hesitate to open an issue on GitHub.
+To report a bug or ask for a feature, please open a [Github issue](https://github.com/kube/vscode-42header/issues).
 
 
 # License
