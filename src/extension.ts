@@ -9,8 +9,8 @@
       ## ## ##*/
 
 import { basename } from 'path'
-import * as vscode from 'vscode'
-import * as moment from 'moment'
+import vscode = require('vscode')
+import moment = require('moment')
 
 import {
   ExtensionContext, TextEdit, TextEditorEdit, TextDocument, Position, Range
@@ -18,7 +18,7 @@ import {
 
 import {
   extractHeader, getHeaderInfo, renderHeader,
-  supportsLanguage, IHeaderInfo
+  supportsLanguage, HeaderInfo
 } from './header'
 
 /**
@@ -41,7 +41,7 @@ function getCurrentUserMail() {
  * Update HeaderInfo with last update author and date, and update filename
  * Returns a fresh new HeaderInfo if none was passed
  */
-function newHeaderInfo(document: TextDocument, headerInfo?: IHeaderInfo) {
+function newHeaderInfo(document: TextDocument, headerInfo?: HeaderInfo) {
   let user = getCurrentUser()
   let mail = getCurrentUserMail()
 

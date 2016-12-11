@@ -11,7 +11,7 @@
 import moment = require('moment')
 import { languageDemiliters } from './delimiters'
 
-export interface IHeaderInfo {
+export type HeaderInfo = {
   filename: string,
   author: string,
   createdBy: string,
@@ -115,7 +115,7 @@ const setFieldValue = (header: string, name: string, value: string) => {
 /**
  * Extract header info from header string
  */
-export const getHeaderInfo = (header: string): IHeaderInfo => ({
+export const getHeaderInfo = (header: string): HeaderInfo => ({
   filename: getFieldValue(header, 'FILENAME'),
   author: getFieldValue(header, 'AUTHOR'),
   createdBy: getFieldValue(header, 'CREATEDBY'),
@@ -127,7 +127,7 @@ export const getHeaderInfo = (header: string): IHeaderInfo => ({
 /**
  * Renders a language template with header info
  */
-export const renderHeader = (languageId: string, info: IHeaderInfo) => [
+export const renderHeader = (languageId: string, info: HeaderInfo) => [
   { name: 'FILENAME', value: info.filename },
   { name: 'AUTHOR', value: info.author },
   { name: 'CREATEDAT', value: formatDate(info.createdAt) },
