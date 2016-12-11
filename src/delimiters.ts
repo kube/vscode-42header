@@ -15,7 +15,7 @@ const parens = ['(* ', ' *)']
 const dashes = ['-- ', ' --']
 const percents = ['%% ', ' %%']
 
-export const languageDemiliters: { [index: string]: string[] | null } = {
+export const languageDemiliters: { [lang: string]: string[] | undefined } = {
   'c': slashes,
   'coffeescript': hashes,
   'cpp': slashes,

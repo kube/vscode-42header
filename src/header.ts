@@ -73,7 +73,7 @@ const parseDate = (date: string) =>
  * Check if language is supported
  */
 export const supportsLanguage = (languageId: string) =>
-  !!languageDemiliters[languageId]
+  languageId in languageDemiliters
 
 /**
  * Returns current header text if present at top of document
