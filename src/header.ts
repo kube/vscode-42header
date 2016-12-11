@@ -42,8 +42,8 @@ const genericTemplate = `
  * Get specific header template for languageId
  */
 const getTemplate = (languageId: string) => {
-  let [left, right] = languageDemiliters[languageId]
-  let width = left.length
+  const [left, right] = languageDemiliters[languageId]
+  const width = left.length
 
   // Replace all delimiters with ones for current language
   return genericTemplate
@@ -79,8 +79,8 @@ export const supportsLanguage = (languageId: string) =>
  * Returns current header text if present at top of document
  */
 export const extractHeader = (text: string): string | null => {
-  let headerRegex = `^(.{80}\n){10}`
-  let match = text.match(headerRegex)
+  const headerRegex = `^(.{80}\n){10}`
+  const match = text.match(headerRegex)
 
   return match ? match[0] : null
 }
@@ -96,7 +96,7 @@ const fieldRegex = (name: string) =>
  * Get value for given field name from header string
  */
 const getFieldValue = (header: string, name: string) => {
-  let [_, offset, field] = genericTemplate.match(fieldRegex(name))
+  const [_, offset, field] = genericTemplate.match(fieldRegex(name))
 
   return header.substr(offset.length, field.length)
 }
@@ -105,7 +105,7 @@ const getFieldValue = (header: string, name: string) => {
  * Set field value in header string
  */
 const setFieldValue = (header: string, name: string, value: string) => {
-  let [_, offset, field] = genericTemplate.match(fieldRegex(name))
+  const [_, offset, field] = genericTemplate.match(fieldRegex(name))
 
   return header.substr(0, offset.length)
     .concat(pad(value, field.length))

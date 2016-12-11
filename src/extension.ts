@@ -42,8 +42,8 @@ function getCurrentUserMail() {
  * Returns a fresh new HeaderInfo if none was passed
  */
 function newHeaderInfo(document: TextDocument, headerInfo?: HeaderInfo) {
-  let user = getCurrentUser()
-  let mail = getCurrentUserMail()
+  const user = getCurrentUser()
+  const mail = getCurrentUserMail()
 
   return Object.assign({},
     // This will be overwritten if headerInfo is not null
@@ -65,13 +65,13 @@ function newHeaderInfo(document: TextDocument, headerInfo?: HeaderInfo) {
  * `insertHeader` Command Handler
  */
 function insertHeaderHandler() {
-  let activeTextEditor = vscode.window.activeTextEditor
-  let document = activeTextEditor.document
-  let languageId = document.languageId
+  const activeTextEditor = vscode.window.activeTextEditor
+  const document = activeTextEditor.document
+  const languageId = document.languageId
 
   if (supportsLanguage(languageId))
     activeTextEditor.edit(editor => {
-      let currentHeader = extractHeader(document.getText())
+      const currentHeader = extractHeader(document.getText())
 
       if (currentHeader)
         editor.replace(new Range(0, 0, 12, 0),
@@ -96,9 +96,9 @@ function insertHeaderHandler() {
  */
 function startHeaderUpdateOnSaveWatcher(subscriptions: vscode.Disposable[]) {
   vscode.workspace.onWillSaveTextDocument(event => {
-    let textEditor = vscode.window.activeTextEditor
-    let document = event.document
-    let currentHeader = extractHeader(document.getText())
+    const textEditor = vscode.window.activeTextEditor
+    const document = event.document
+    const currentHeader = extractHeader(document.getText())
 
     event.waitUntil(
       textEditor.edit(editor => {
@@ -116,7 +116,7 @@ function startHeaderUpdateOnSaveWatcher(subscriptions: vscode.Disposable[]) {
 }
 
 export function activate(context: vscode.ExtensionContext) {
-  let disposable = vscode.commands
+  const disposable = vscode.commands
     .registerTextEditorCommand('42header.insertHeader', insertHeaderHandler)
 
   context.subscriptions.push(disposable)
