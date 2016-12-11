@@ -1,4 +1,6 @@
-<img src="https://raw.githubusercontent.com/kube/vscode-42header/master/42.png" width=128>
+<img
+  src="https://raw.githubusercontent.com/kube/vscode-42header/master/42.png" 
+  width=128>
 
 # 42 Header for VSCode
 
@@ -18,6 +20,9 @@ This extension provides the 42 header integration in VS Code.
 # **************************************************************************** #
 ```
 
+# Install
+
+`ext install 42header`
 
 # Usage
 
