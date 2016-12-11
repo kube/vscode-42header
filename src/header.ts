@@ -39,7 +39,7 @@ const genericTemplate = `
 `.substring(1)
 
 /**
- * Get header template from languageId
+ * Get specific header template for languageId
  */
 const getTemplate = (languageId: string) => {
   let [left, right] = languageDemiliters[languageId]
@@ -76,7 +76,7 @@ export const supportsLanguage = (languageId: string) =>
   !!languageDemiliters[languageId]
 
 /**
- * Returns current header as string if present at top of document
+ * Returns current header text if present at top of document
  */
 export const extractHeader = (text: string): string | null => {
   let headerRegex = `^(.{80}\n){10}`
@@ -93,7 +93,7 @@ const fieldRegex = (name: string) =>
   new RegExp(`^((?:.*\\\n)*.*)(\\\$${name}_*)`, '')
 
 /**
- * Get value by field name in header string
+ * Get value for given field name from header string
  */
 const getFieldValue = (header: string, name: string) => {
   let [_, offset, field] = genericTemplate.match(fieldRegex(name))
