@@ -22,7 +22,10 @@ This extension provides the 42 header integration in VS Code.
 
 # Install
 
-`ext install 42header`
+Launch Quick Open (`⌘`+`P`) and enter
+```
+ext install 42header
+```
 
 # Usage
 
