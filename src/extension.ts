@@ -24,24 +24,22 @@ import {
 /**
  * Return current user from config or ENV by default
  */
-function getCurrentUser() {
-  return vscode.workspace.getConfiguration()
+const getCurrentUser = () =>
+  vscode.workspace.getConfiguration()
     .get('42header.username') || process.env['USER'] || 'marvin'
-}
 
 /**
  * Return current user mail from config or default value
  */
-function getCurrentUserMail() {
-  return vscode.workspace.getConfiguration()
+const getCurrentUserMail = () =>
+  vscode.workspace.getConfiguration()
     .get('42header.email') || `${getCurrentUser()}@student.42.fr`
-}
 
 /**
  * Update HeaderInfo with last update author and date, and update filename
  * Returns a fresh new HeaderInfo if none was passed
  */
-function newHeaderInfo(document: TextDocument, headerInfo?: HeaderInfo) {
+const newHeaderInfo = (document: TextDocument, headerInfo?: HeaderInfo) => {
   const user = getCurrentUser()
   const mail = getCurrentUserMail()
 
@@ -64,7 +62,7 @@ function newHeaderInfo(document: TextDocument, headerInfo?: HeaderInfo) {
 /**
  * `insertHeader` Command Handler
  */
-function insertHeaderHandler() {
+const insertHeaderHandler = () => {
   const activeTextEditor = vscode.window.activeTextEditor
   const document = activeTextEditor.document
   const languageId = document.languageId
@@ -94,31 +92,35 @@ function insertHeaderHandler() {
 /**
  * Start watcher for document save to update current header
  */
-function startHeaderUpdateOnSaveWatcher(subscriptions: vscode.Disposable[]) {
+const startUpdateOnSaveWatcher = (subscriptions: vscode.Disposable[]) =>
   vscode.workspace.onWillSaveTextDocument(event => {
-    const textEditor = vscode.window.activeTextEditor
     const document = event.document
     const currentHeader = extractHeader(document.getText())
 
     event.waitUntil(
-      textEditor.edit(editor => {
-        // If current language is supported
-        // and a header is present at top of document
-        if (supportsLanguage(document.languageId) && currentHeader)
-          editor.replace(new Range(0, 0, 12, 0),
-            renderHeader(document.languageId,
-              newHeaderInfo(document, getHeaderInfo(currentHeader))
+      Promise.resolve(
+        supportsLanguage(document.languageId) && currentHeader ?
+          [
+            TextEdit.replace(
+              new Range(0, 0, 12, 0),
+              renderHeader(
+                document.languageId,
+                newHeaderInfo(document, getHeaderInfo(currentHeader))
+              )
             )
-          )
-      })
+          ]
+          : [] // No TextEdit to apply
+      )
     )
-  }, null, subscriptions)
-}
+  },
+    null, subscriptions
+  )
 
-export function activate(context: vscode.ExtensionContext) {
+
+export const activate = (context: vscode.ExtensionContext) => {
   const disposable = vscode.commands
     .registerTextEditorCommand('42header.insertHeader', insertHeaderHandler)
 
   context.subscriptions.push(disposable)
-  startHeaderUpdateOnSaveWatcher(context.subscriptions)
+  startUpdateOnSaveWatcher(context.subscriptions)
 }
