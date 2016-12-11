@@ -8,7 +8,7 @@
      ## ## ## :##
       ## ## ##*/
 
-import * as path from 'path'
+import { basename } from 'path'
 import * as vscode from 'vscode'
 import * as moment from 'moment'
 
@@ -53,7 +53,7 @@ function newHeaderInfo(document: TextDocument, headerInfo?: IHeaderInfo) {
     },
     headerInfo,
     {
-      filename: path.basename(document.fileName),
+      filename: basename(document.fileName),
       author: `${user} <${mail}>`,
       updatedBy: user,
       updatedAt: moment()

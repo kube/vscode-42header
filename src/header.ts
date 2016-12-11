@@ -8,7 +8,7 @@
      ## ## ## :##
       ## ## ##*/
 
-import * as moment from 'moment'
+import moment = require('moment')
 import { languageDemiliters } from './delimiters'
 
 export interface IHeaderInfo {
