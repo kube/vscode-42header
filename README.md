@@ -20,14 +20,14 @@ This extension provides the 42 header integration in VS Code.
 # **************************************************************************** #
 ```
 
-# Install
+## Install
 
 Launch Quick Open (`⌘`+`P`) and enter
 ```
 ext install 42header
 ```
 
-# Usage
+## Usage
 
 ### Insert a header
  - **macOS** : `⌘` + `⌥` + `H`
@@ -36,7 +36,7 @@ ext install 42header
 Header is automatically updated on save.
 
 
-# Configuration
+## Configuration
 
 Default values for **username** and **email** are imported from environment variables.
 
@@ -50,11 +50,11 @@ To override these values, specify these properties in *User Settings* :
 ```
 
 
-# Issues
+## Issues
 
 To report a bug or ask for a feature, please open a [Github issue](https://github.com/kube/vscode-42header/issues).
 
 
-# License
+## License
 
 MIT
