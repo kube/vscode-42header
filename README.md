@@ -30,8 +30,8 @@ ext install 42header
 ## Usage
 
 ### Insert a header
- - **macOS** : `⌘` + `⌥` + `H`
- - **Linux** / **Windows** : `Ctrl` + `Alt` + `H`.
+ - **macOS** : <kbd>⌘</kbd> + <kbd>⌥</kbd> + <kbd>H</kbd>
+ - **Linux** / **Windows** : <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>H</kbd>.
 
 Header is automatically updated on save.
 
