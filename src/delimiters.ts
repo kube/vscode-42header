@@ -32,7 +32,7 @@ export const languageDemiliters: { [lang: string]: string[] | undefined } = {
   'javascriptreact': slashes,
   'latex': percents,
   'less': slashes,
-  'lua': semicolons,
+  'lua': dashes,
   'makefile': hashes,
   'objective-c': slashes,
   'ocaml': parens,
