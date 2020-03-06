@@ -52,8 +52,7 @@ To override these values, specify these properties in *User Settings* :
 
 ## Issues
 
-To report a bug or ask for a feature, please open a [Github issue](https://github.com/kube/vscode-42header/issues).
-
+In case of a bug, or missing feature, please create a [Github Pull Request](https://github.com/kube/vscode-42header/pulls).
 
 ## License
 
