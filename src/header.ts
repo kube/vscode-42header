@@ -35,7 +35,6 @@ const genericTemplate = `
 *    Updated: $UPDATEDAT_________ by $UPDATEDBY_      ###   ########.fr        *
 *                                                                              *
 ********************************************************************************
-
 `.substring(1)
 
 /**
