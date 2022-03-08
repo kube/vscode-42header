@@ -79,10 +79,10 @@ export const supportsLanguage = (languageId: string) =>
  * Returns current header text if present at top of document
  */
 export const extractHeader = (text: string): string | null => {
-  const headerRegex = `^(.{80}\n){10}`
+  const headerRegex = `^(.{80}(\r\n|\n)){10}`
   const match = text.match(headerRegex)
 
-  return match ? match[0] : null
+  return match ? match[0].split('\r\n').join('\n') : null
 }
 
 /**
