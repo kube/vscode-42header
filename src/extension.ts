@@ -33,7 +33,7 @@ const getCurrentUser = () =>
  */
 const getCurrentUserMail = () =>
   vscode.workspace.getConfiguration()
-    .get('42header.email') || `${getCurrentUser()}@student.42.fr`
+    .get('42header.email') || process.env['MAIL'] || `${getCurrentUser()}@student.42.fr`
 
 /**
  * Update HeaderInfo with last update author and date, and update filename
