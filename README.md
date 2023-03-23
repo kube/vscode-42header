@@ -2,6 +2,17 @@
   src="https://raw.githubusercontent.com/kube/vscode-42header/master/42.png" 
   width=128>
 
+> **Searching for Maintainer.**
+> 
+> This project was done 7 years ago, which is an eternity relative to VSCode Lifespan.
+> I don't have time to maintain this, but I see a lot of people doing Pull Requests for it, or creating issues.
+> 
+> As there are no Unit Tests and no CI/CD, it makes it even harder to check for issues and PRs.
+>
+> What I'd like to do is to give ownership to an "official" 42 organization on GitHub, where a group of students could maintain and update this project themselves.
+>
+> If you are interested in such a thing, please ping me.
+
 # 42 Header for VSCode
 
 This extension provides the 42 header integration in VS Code.
