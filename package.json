@@ -2,17 +2,17 @@
   "name": "42header",
   "displayName": "42 Header",
   "description": "42 header for VSCode : www.42.fr",
-  "version": "0.42.7",
-  "publisher": "kube",
+  "version": "0.42.10",
+  "publisher": "stormphlegyas",
   "icon": "42.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/kube/vscode-42header"
+    "url": "https://github.com/stormphlegyas/vscode-42header"
   },
   "bugs": {
-    "url": "https://github.com/kube/vscode-42header/issues"
+    "url": "https://github.com/stormphlegyas/vscode-42header/issues"
   },
-  "homepage": "https://github.com/kube/vscode-42header",
+  "homepage": "https://github.com/stormphlegyas/vscode-42header",
   "license": "MIT",
   "engines": {
     "vscode": "^1.6.0"

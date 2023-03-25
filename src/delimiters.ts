@@ -8,14 +8,15 @@
      ## ## ## :##
       ## ## ##*/
 
-const hashes = ['# ', ' #']
-const slashes = ['/* ', ' */']
-const semicolons = [';; ', ' ;;']
-const parens = ['(* ', ' *)']
-const dashes = ['-- ', ' --']
-const percents = ['%% ', ' %%']
+const slashes = ['/*', '*/', '/*', '*/', '/*', '*/'];
+const hashes = ['#', '#', '#', '#', '#', '#'];
+const semicolons = [';; ', ' ;;', ';;', ';;', ';; ', ' ;;']
+const parens = ['(* ', ' *)', '(*', '*)', '(* ', ' *)']
+const dashes = ['-- ', ' --', '--', '--', '-- ', ' --']
+const percents = ['%% ', ' %%', '%%', '%%', '%% ', ' %%']
+const angleBrackets = ['<!-- ', '*', '*', '*', '*', ' -->']
 
-export const languageDemiliters: { [lang: string]: string[] | undefined } = {
+export const languageDelimiters: { [lang: string]: string[] | undefined } = {
   'c': slashes,
   'coffeescript': hashes,
   'cpp': slashes,
@@ -52,5 +53,8 @@ export const languageDemiliters: { [lang: string]: string[] | undefined } = {
   'typescript': slashes,
   'typescriptreact': slashes,
   'xsl': slashes,
-  'yaml': hashes
+  'yaml': hashes,
+  'html': angleBrackets,
+  'vue': angleBrackets,
+  'solidity': slashes
 }

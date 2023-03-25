@@ -9,7 +9,7 @@
       ## ## ##*/
 
 import moment = require('moment')
-import { languageDemiliters } from './delimiters'
+import { languageDelimiters } from './delimiters'
 
 export type HeaderInfo = {
   filename: string,
@@ -41,15 +41,23 @@ const genericTemplate = `
 /**
  * Get specific header template for languageId
  */
-const getTemplate = (languageId: string) => {
-  const [left, right] = languageDemiliters[languageId]
-  const width = left.length
 
-  // Replace all delimiters with ones for current language
+const getTemplate = (languageId: string) => {
+  const [topLeft, topRight, left, right, bottomLeft, bottomRight] = languageDelimiters[languageId];
+
   return genericTemplate
-    .replace(new RegExp(`^(.{${width}})(.*)(.{${width}})$`, 'gm'),
-    left + '$2' + right)
-}
+    .split('\n')
+    .map((line, index, array) => {
+      if (index === 0) {
+        return line.replace(new RegExp(`^(.{${topLeft.length}})(.*)(.{${topRight.length}})$`, 'g'), topLeft + '$2' + topRight);
+      } else if (index === array.length - 3) {
+        return line.replace(new RegExp(`^(.{${bottomLeft.length}})(.*)(.{${bottomRight.length}})$`, 'g'), bottomLeft + '$2' + bottomRight);
+      } else {
+        return line.replace(new RegExp(`^(.{${left.length}})(.*)(.{${right.length}})$`, 'g'), left + '$2' + right);
+      }
+    })
+    .join('\n');
+};
 
 /**
  * Fit value to correct field width, padded with spaces
@@ -73,7 +81,7 @@ const parseDate = (date: string) =>
  * Check if language is supported
  */
 export const supportsLanguage = (languageId: string) =>
-  languageId in languageDemiliters
+  languageId in languageDelimiters
 
 /**
  * Returns current header text if present at top of document
