@@ -1,9 +1,9 @@
 name: CI/CD
-run-name: ${{ github.actor }} is running CI 🚀
+run-name: ${{ github.actor }} is running CI/CD 🚀
 on:
-  push:
-    branches: [ master ]
   pull_request:
+    branches: [ master ]
+  push:
     branches: [ master ]
 jobs:
   test:
@@ -21,3 +21,38 @@ jobs:
       - run: sudo apt-get install xvfb
       - run: npm install
       - run: xvfb-run -a npm run test -- --headless
+  deploy:
+    name: Deploy to Marketplace
+    needs: test
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    env:
+      VSCE_PAT: ${{ secrets.VSCE_PAT }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.x'
+      - name: Install vsce tool
+        run: npm install -g vsce
+      - name: Publish to Marketplace
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        run: vsce publish -p ${{ env.VSCE_PAT }}
+  push:
+    name: Push changes
+    needs: deploy
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Push changes to branch
+        run: |
+          git config --global user.email "mmoumini@student.42.fr"
+          git config --global user.name "Moustoifa Moumini"
+          git add package.json
+          git commit -m "Bump version for release"
+          git push
