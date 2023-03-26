@@ -56,17 +56,18 @@
   "scripts": {
     "vscode:prepublish": "tsc -p ./",
     "compile": "tsc -watch -p ./",
-    "test": "tsc && mocha test/**/*.test.ts"
+    "test": "tsc && node ./out/test/runTest.js"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.1",
-    "@types/node": "^6.0.45",
+    "@types/node": "^18.15.10",
+    "@types/vscode": "^1.76.0",
+    "@vscode/test-electron": "^2.3.0",
+    "glob": "^9.3.2",
     "mocha": "^10.2.0",
     "typescript": "^5.0.2"
   },
   "dependencies": {
-    "@types/vscode": "^1.76.0",
-    "@vscode/test-electron": "^2.3.0",
     "moment": "^2.15.0"
   }
 }
