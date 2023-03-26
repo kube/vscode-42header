@@ -12,25 +12,21 @@ suite('Extension Test Suite', () => {
     const tempFile = createTempCppFile();
     await vscode.workspace.getConfiguration('42header', null).update('username', 'marvin', true);
     await vscode.workspace.getConfiguration('42header', null).update('email', 'marvin@42.fr', true);
-    sleep(1000);
     await insertHeader(tempFile);
-    sleep(1000);
 
     const content = readFileContent(tempFile);
-    sleep(1000);
 
     const lines = content.split(os.EOL);
-    sleep(1000);
 
     const expectedUserName = vscode.workspace.getConfiguration('42header', null).get('username');
     const expectedEmail = vscode.workspace.getConfiguration('42header', null).get('email');
     const headerLine = lines[7];
 
-    assert(lines[5].includes(expectedEmail as string), `Header line does not contain expected user name "${expectedEmail}"`);
+    assert(lines[5].includes(`<${expectedEmail as string}>`), `Header line does not contain expected user name "${expectedEmail}"`);
 
-    assert(lines[5].includes(expectedUserName as string), `Header line does not contain expected user name "${expectedUserName}"`);
-    assert(lines[7].includes(expectedUserName as string), `Header line does not contain expected user name "${expectedUserName}"`);
-    assert(lines[8].includes(expectedUserName as string), `Header line does not contain expected user name "${expectedUserName}"`);
+    assert(lines[5].includes(` ${expectedUserName as string} `), `Header line does not contain expected user name "${expectedUserName}"`);
+    assert(lines[7].includes(` ${expectedUserName as string} `), `Header line does not contain expected user name "${expectedUserName}"`);
+    assert(lines[8].includes(` ${expectedUserName as string} `), `Header line does not contain expected user name "${expectedUserName}"`);
 
     fs.unlinkSync(tempFile);
   });
