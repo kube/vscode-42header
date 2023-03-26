@@ -1,0 +1,23 @@
+name: CI/CD
+run-name: ${{ github.actor }} is running CI 🚀
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: sudo apt-get install xvfb
+      - run: npm install
+      - run: xvfb-run -a npm run test -- --headless
