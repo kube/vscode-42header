@@ -2,7 +2,7 @@
   src="https://raw.githubusercontent.com/stormphlegyas/vscode-42header/master/42.png" 
   width=128>
 
-# 42 Header for VSCode
+# 42 Header V2 for VSCode
 
 This extension provides the 42 header integration in VS Code.
 

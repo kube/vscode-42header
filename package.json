@@ -1,8 +1,8 @@
 {
-  "name": "42header",
-  "displayName": "42 Header",
+  "name": "42headerV2",
+  "displayName": "42 Header V2",
   "description": "42 header for VSCode : www.42.fr",
-  "version": "0.42.10",
+  "version": "0.42.11",
   "publisher": "stormphlegyas",
   "icon": "42.png",
   "repository": {
@@ -56,12 +56,13 @@
   "scripts": {
     "vscode:prepublish": "tsc -p ./",
     "compile": "tsc -watch -p ./",
-    "test": "tsc && node ./out/test/runTest.js"
+    "test": "tsc && node ./out/test/runTest.js",
+    "release": "npm version patch"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.1",
     "@types/node": "^18.15.10",
-    "@types/vscode": "^1.76.0",
+    "@types/vscode": "^1.6.0",
     "@vscode/test-electron": "^2.3.0",
     "glob": "^9.3.2",
     "mocha": "^10.2.0",
