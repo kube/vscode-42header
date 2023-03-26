@@ -60,10 +60,11 @@
   },
   "devDependencies": {
     "@types/node": "^6.0.45",
-    "typescript": "^2.0.3",
-    "vscode": "^1.0.0"
+    "typescript": "^2.1.4"
   },
   "dependencies": {
+    "@types/vscode": "^1.76.0",
+    "@vscode/test-electron": "^2.3.0",
     "moment": "^2.15.0"
   }
 }
