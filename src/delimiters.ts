@@ -56,5 +56,7 @@ export const languageDelimiters: { [lang: string]: string[] | undefined } = {
   'yaml': hashes,
   'html': angleBrackets,
   'vue': angleBrackets,
-  'solidity': slashes
+  'solidity': slashes,
+  'dart' : slashes,
+  'kotlin' : slashes
 }

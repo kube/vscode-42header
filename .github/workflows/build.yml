@@ -21,6 +21,7 @@ jobs:
       - run: sudo apt-get install xvfb
       - run: npm install
       - run: xvfb-run -a npm run test -- --headless
+
   deploy:
     name: Deploy to Marketplace
     needs: test
@@ -38,9 +39,8 @@ jobs:
       - name: Install vsce tool
         run: npm install -g vsce
       - name: Publish to Marketplace
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-        run: vsce publish -p ${{ env.VSCE_PAT }}
+        run: vsce publish -p ${{ secrets.VSCE_PAT }}
+
   push:
     name: Push changes
     needs: deploy
