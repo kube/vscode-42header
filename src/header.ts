@@ -24,17 +24,17 @@ export type HeaderInfo = {
  * Template where each field name is prefixed by $ and is padded with _
  */
 const genericTemplate = `
-********************************************************************************
-*                                                                              *
-*                                                         :::      ::::::::    *
-*    $FILENAME__________________________________        :+:      :+:    :+:    *
-*                                                     +:+ +:+         +:+      *
-*    By: $AUTHOR________________________________    +#+  +:+       +#+         *
-*                                                 +#+#+#+#+#+   +#+            *
-*    Created: $CREATEDAT_________ by $CREATEDBY_       #+#    #+#              *
-*    Updated: $UPDATEDAT_________ by $UPDATEDBY_      ###   ########.fr        *
-*                                                                              *
-********************************************************************************
+*************************************************************************************
+*                                                                                   *
+*                                                              :::      ::::::::    *
+*    $FILENAME_______________________________________        :+:      :+:    :+:    *
+*                                                          +:+ +:+         +:+      *
+*    By: $AUTHOR_____________________________________    +#+  +:+       +#+         *
+*                                                      +#+#+#+#+#+   +#+            *
+*    Created: $CREATEDAT_________ by $CREATEDBY______       #+#    #+#              *
+*    Updated: $UPDATEDAT_________ by $UPDATEDBY______      ###   ########.fr        *
+*                                                                                   *
+*************************************************************************************
 
 `.substring(1)
 
@@ -79,7 +79,7 @@ export const supportsLanguage = (languageId: string) =>
  * Returns current header text if present at top of document
  */
 export const extractHeader = (text: string): string | null => {
-  const headerRegex = `^(.{80}(\r\n|\n)){10}`
+  const headerRegex = `^(.{85}(\r\n|\n)){10}`
   const match = text.match(headerRegex)
 
   return match ? match[0].split('\r\n').join('\n') : null
