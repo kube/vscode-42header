@@ -17,6 +17,7 @@ const percents = ['%% ', ' %%']
 
 export const languageDemiliters: { [lang: string]: string[] | undefined } = {
   'c': slashes,
+  'opencl': slashes,
   'coffeescript': hashes,
   'cpp': slashes,
   'css': slashes,
