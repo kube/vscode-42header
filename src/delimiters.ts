@@ -47,7 +47,7 @@ export const languageDemiliters: { [lang: string]: string[] | undefined } = {
   'rust': slashes,
   'scss': slashes,
   'shellscript': hashes,
-  'sql': hashes,
+  'sql': dashes,
   'swift': slashes,
   'typescript': slashes,
   'typescriptreact': slashes,
